@@ -2,16 +2,17 @@
 using System.Threading;
 using NAudio.Wave;
 using System.IO;
-namespace playsound
+namespace playsoundcore
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var files = System.IO.Directory.GetFiles(".\\");
-            foreach (var fileName in files)
+            var cultureInfo = new System.Globalization.CultureInfo("zh-TW");
+            foreach (var fileName in Directory.GetFiles(".\\"))
             {
-                if (Path.GetExtension(fileName).ToLower().Equals(".mp3"))
+                if (Path.GetExtension(fileName).ToLower(cultureInfo)
+                    .Equals(".mp3", StringComparison.OrdinalIgnoreCase))
                 {
                     PlaySound(fileName);
                 }
